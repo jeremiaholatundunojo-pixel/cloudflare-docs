@@ -1,0 +1,21 @@
+---
+title: Python Workers handlers now live in an entrypoint class
+description: We are changing how Python Workers are structured by default.
+products:
+  - workers
+date: 2025-08-14
+---
+
+We are changing how Python Workers are structured by default. Previously, handlers were defined at the top-level of a module as `on_fetch`, `on_scheduled`, etc. methods, but now they live in an entrypoint class.
+
+Here's an example of how to now define a Worker with a fetch handler:
+
+```python
+from workers import Response, WorkerEntrypoint
+
+class Default(WorkerEntrypoint):
+    async def fetch(self, request, env, ctx):
+        return Response("Hello World!")
+```
+
+Consult the [Python Workers documentation](/workers/languages/python/) for more details.
